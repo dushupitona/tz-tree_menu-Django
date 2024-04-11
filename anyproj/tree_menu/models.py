@@ -4,6 +4,7 @@ from tree_menu.manager import MenuQuerySet
 # Create your models here.
 
 class MenuItemModel(models.Model):
+    slug = models.SlugField()
     name = models.CharField(max_length=64)
     lvl = models.IntegerField()
     parent = models.ForeignKey(

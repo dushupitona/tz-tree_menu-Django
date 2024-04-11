@@ -6,7 +6,6 @@ from django.db.models.query import QuerySet, NamedValuesListIterable, FlatValues
 
 class MenuQuerySet(QuerySet):
         def values_list(self, *fields, flat=False, named=False):
-
             super().values_list(*fields, flat=flat, named=named)
             if flat and named:
                 raise TypeError("'flat' and 'named' can't be used together.")
@@ -17,9 +16,9 @@ class MenuQuerySet(QuerySet):
                 )
 
             field_names = {f for f in fields if not hasattr(f, "resolve_expression")}
-            _fields = ['name', ]
+            _fields = ['name', 'lvl' ]
             for i in range(0, MENU_MAX_LEVEL):
-                _fields.append('parent__' * (i + 1) + 'name')
+                _fields.append('parent__' * i + 'slug')
             expressions = {}
             counter = 1
             for field in fields:
