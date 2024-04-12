@@ -5,6 +5,7 @@ from django.db.models.query import QuerySet, NamedValuesListIterable, FlatValues
 
 
 class MenuQuerySet(QuerySet):
+
         def values_list(self, *fields, flat=False, named=False):
             super().values_list(*fields, flat=flat, named=named)
             if flat and named:
