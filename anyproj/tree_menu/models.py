@@ -3,7 +3,14 @@ from tree_menu.manager import MenuQuerySet
 
 # Create your models here.
 
+class MenuModel(models.Model):
+    name = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.name
+
 class MenuItemModel(models.Model):
+    menu = models.ForeignKey(to=MenuModel, on_delete=models.CASCADE)
     slug = models.SlugField()
     name = models.CharField(max_length=64)
     lvl = models.IntegerField()
