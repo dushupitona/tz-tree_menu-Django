@@ -8,3 +8,7 @@ def index(request):
 
 def fruits_index(request, slug):
     return render(request, 'slug_index.html', context={'slug': slug})
+
+
+def test_index(request):
+    return render(request, )

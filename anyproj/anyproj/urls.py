@@ -22,5 +22,9 @@ from tree_menu.views import index
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
-    path('', include('tree_menu.urls'))
+    path('', include('tree_menu.urls')),
 ]
+
+# urlpatterns = [
+#     re_path(r'^(?P<slugs>[-a-zA-Z0-9_]+)/?$', views.dynamic_slug_view, name='dynamic_slug_view'),
+# ]
