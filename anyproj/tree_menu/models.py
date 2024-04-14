@@ -1,5 +1,4 @@
-from django.db import models
-from tree_menu.manager import MenuQuerySet
+from django.db import models    
 
 # Create your models here.
 
@@ -21,8 +20,6 @@ class MenuItemModel(models.Model):
         blank=True,
         null=True
     )
-
-    objects = MenuQuerySet.as_manager()
 
     def __str__(self):
         return self.name

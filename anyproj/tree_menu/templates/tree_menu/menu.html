@@ -1,6 +1,11 @@
+{% load static %}
+
 {% if out_data %}
-    <h1>I must show menu</h1>
-    {% for d in out_data %}
-        {{ d }}
-    {% endfor %}
+    <ul>
+        {% for d in out_data %}
+                <li><a href="{% url 'tree_menu:fruits_go' slug=d.0 %}">{{ d.0 }}</a></li>
+    
+        {% endfor %}
+    </ul>
 {% endif %}
+

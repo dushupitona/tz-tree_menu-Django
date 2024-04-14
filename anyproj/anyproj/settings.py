@@ -139,5 +139,3 @@ LOGGING = {
     }
 }
 
-
-MENU_MAX_LEVEL = 10
