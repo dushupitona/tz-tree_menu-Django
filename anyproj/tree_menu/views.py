@@ -8,7 +8,3 @@ def index(request):
 
 def product_index(request):
     return render(request, 'slug_index.html')
-
-
-def test_index(request):
-    return render(request, )
