@@ -20,7 +20,8 @@ class MenuItemModel(models.Model):
         blank=True,
         null=True
     )
-
+    url = models.URLField()
+    named_url = models.SlugField()
     def __str__(self):
         return self.name
     
@@ -32,4 +33,4 @@ class MenuItemModel(models.Model):
 
     # from tree_menu.models import MenuItemModel as m
 
-    # need slug !!!
+    # need slug !!! {% url 'tree_menu:d.2' %}

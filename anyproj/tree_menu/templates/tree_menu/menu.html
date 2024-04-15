@@ -3,7 +3,7 @@
 {% if out_data %}
     <ul>
         {% for d in out_data %}
-                <li><a href="{% url 'tree_menu:fruits_go' slug=d.0 %}">{{ d.0 }}</a></li>
+                <li><a href="{% url 'tree_menu:'|add:d.0 %}">{{ d.0 }}</a></li>
     
         {% endfor %}
     </ul>

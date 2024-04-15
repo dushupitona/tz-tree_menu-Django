@@ -6,8 +6,8 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'tree_menu/index.html')
 
-def fruits_index(request, slug):
-    return render(request, 'slug_index.html', context={'slug': slug})
+def product_index(request):
+    return render(request, 'slug_index.html')
 
 
 def test_index(request):
