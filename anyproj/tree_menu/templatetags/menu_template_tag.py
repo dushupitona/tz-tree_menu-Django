@@ -14,7 +14,10 @@ def draw_menu(context, menu_name):
 
     current_page_url = context['request'].path
 
-    current_page_url = current_page_url.split('/')
+
+
+
+    print(current_page_url)
 
 
     slug_list = []
@@ -23,7 +26,11 @@ def draw_menu(context, menu_name):
 
     # [('fruits', 0, 'parent'), ('vegetables', 0, 'parent'), ('apples', 1, 'fruits'), ('mango', 1, 'fruits'), ('cucumber', 1, 'vegetables'), ('red_apple', 2, 'apples'), ('green_apple', 2, 'apples'), ('gold_mango', 2, 'mango')]
 
-    pprint.pprint(slug_list)
+
+    def get_slug_by_url(url, slug_list):
+        ...
+
+
 
     out = []
 
