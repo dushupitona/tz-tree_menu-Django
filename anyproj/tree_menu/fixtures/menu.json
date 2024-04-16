@@ -1,0 +1,1 @@
+[{"model": "tree_menu.menumodel", "pk": 1, "fields": {"name": "product_menu"}}, {"model": "tree_menu.menumodel", "pk": 2, "fields": {"name": "car_menu"}}]
