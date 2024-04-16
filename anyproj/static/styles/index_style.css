@@ -1,0 +1,30 @@
+body {
+    background-color: rgb(150, 231, 165);
+}
+
+.menu_block {
+    margin-top: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.menu {
+    margin: 100px;
+}
+
+li {
+    display: block;
+    width: 250px;
+    height: 50px;
+    background-color: azure;
+    border: 4px solid;
+    border-radius: 5px;
+    margin: 4px;
+    text-align: center;
+    font-size: xx-large;
+}
+
+a {
+    text-decoration: none;
+}

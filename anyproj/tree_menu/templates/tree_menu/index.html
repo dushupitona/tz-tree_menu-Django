@@ -1,3 +1,4 @@
+{% load static %}
 
 {% load menu_template_tag %}
 <!DOCTYPE html>
@@ -7,12 +8,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>INDEX</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{% static 'styles/index_style.css' %}">
 </head>
 
 <body>
-    {% draw_menu "red_menu" %}
+  <div class="menu_block">
+      <div class="menu">
+        {% draw_menu "red_menu" %}
+      </div>
 
+      <div class="menu">
+        {% draw_menu "car_menu" %}
+      </div>
+
+  </div>
 </body>
 
 </html>

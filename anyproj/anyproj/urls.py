@@ -19,9 +19,9 @@ from django.urls import path, include
 
 from tree_menu.views import index
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index),
     path('', include('tree_menu.urls')),
 ]
-
