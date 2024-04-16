@@ -1,9 +1,7 @@
 from django import template
-from tree_menu.models import MenuItemModel, MenuModel
+from tree_menu.models import MenuItemModel
 from django.http import HttpRequest 
 from django.urls import resolve
-
-import pprint
 
 
 register = template.Library()
@@ -13,17 +11,11 @@ register = template.Library()
 def draw_menu(context, menu_name):
     response_dict = MenuItemModel.objects.select_related('menu').filter(menu__name=menu_name).values('slug', 'lvl', 'name', 'parent__slug', 'url', 'named_url')
 
-
     current_page_url = context['request'].path
 
-
     slug_list = []
-    [slug_list.append((dct['slug'], dct['lvl'], dct['url'], dct['named_url'], dct['parent__slug'] if dct['parent__slug'] is not None else 'parent')) for dct in response_dict]
+    [slug_list.append((dct['slug'], dct['lvl'], dct['url'], dct['named_url'], dct['name'], dct['parent__slug'] if dct['parent__slug'] is not None else 'parent')) for dct in response_dict]
     slug_list = sorted(slug_list, key=lambda x: (x[1], x[2]))
-
-
-    # [('fruits', 0, 'parent'), ('vegetables', 0, 'parent'), ('apples', 1, 'fruits'), ('mango', 1, 'fruits'), ('cucumber', 1, 'vegetables'), ('red_apple', 2, 'apples'), ('green_apple', 2, 'apples'), ('gold_mango', 2, 'mango')]
-
 
     def get_slug_by_url(url, slug_list):
         request = HttpRequest()
@@ -32,17 +24,15 @@ def draw_menu(context, menu_name):
         url_name =  matched_view.url_name
         
         for set in slug_list:
-            if set[0] == url_name:
+            if set[3] == url_name:
                 return set
         return 'main_page'
     
-
     out = []
 
     def add_set(set):
-        slug = set[0]
         lvl = set[1]
-        parent = set[4]
+        parent = set[5]
 
         if lvl == 0:
             out.append(set)
@@ -52,10 +42,8 @@ def draw_menu(context, menu_name):
                     index = out.index(ad_set)+1
                     out.insert(index, set)
 
-
     for set in slug_list:
         add_set(set)
-
 
     def cut_by_url(out_list):
         current_set = get_slug_by_url(current_page_url, slug_list)
@@ -68,7 +56,7 @@ def draw_menu(context, menu_name):
         elif current_set[1] == 0:
             new_out = []
             for set in out_list:
-                if set[1] == 0 or set[4] == current_set[0]:
+                if set[1] == 0 or set[5] == current_set[0]:
                     new_out.append(set)
 
         else:
@@ -86,25 +74,15 @@ def draw_menu(context, menu_name):
                                  k-=1
                                  need_add.append(out_list[_])
 
-
-                    elif out_list[x][4] == current_set[0]:
+                    elif out_list[x][5] == current_set[0]:
                         need_add.append(out_list[x])
                            
                     for set in need_add[::-1]:
                         new_out.append(set)   
 
-
-
-
-                # elif (out_list[x][1] <= current_set[1] and out_list[x-1][0] == current_set[4]) or out_list[x][4] == current_set[0]:
-                #     new_out.append(out_list[x])
-
-
-
         return new_out
 
     out = cut_by_url(out)
 
-    # pprint.pprint(out)
     context = {'out_data': out}     
     return context

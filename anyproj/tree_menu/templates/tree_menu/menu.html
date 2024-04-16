@@ -3,7 +3,19 @@
 {% if out_data %}
     <ul>
         {% for d in out_data %}
-                <li><a href="{% url 'tree_menu:'|add:d.0 %}">{{ d.0 }}</a></li>
+            {% if d.2 == '' %}
+
+                <li class="menu-item depth-{{ d.1 }}">
+                    <a href="{% url 'tree_menu:'|add:d.3 %}">{{ d.4 }}</a>
+                </li>
+
+            {% else %}
+
+                <li class="menu-item depth-{{ d.1 }}">
+                    <a href="{{ d.2 }}">{{ d.4 }}</a>
+                </li>
+
+            {% endif %}
     
         {% endfor %}
     </ul>
