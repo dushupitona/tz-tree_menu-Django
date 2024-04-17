@@ -3,7 +3,13 @@
 {% if out_data %}
     <ul>
         {% for d in out_data %}
-            {% if d.2 == '' %}
+            {% if d.2 != '' %}
+
+                <li class="menu-item depth-{{ d.1 }}">
+                    <a href="{{ d.2 }}">{{ d.4 }}</a>
+                </li>
+
+            {% elif d.3 != '' %}
 
                 <li class="menu-item depth-{{ d.1 }}">
                     <a href="{% url 'tree_menu:'|add:d.3 %}">{{ d.4 }}</a>
@@ -11,9 +17,7 @@
 
             {% else %}
 
-                <li class="menu-item depth-{{ d.1 }}">
-                    <a href="{{ d.2 }}">{{ d.4 }}</a>
-                </li>
+                <h2> Необходимо задать url явно или через named url для поля {{ d.4 }} </h2>
 
             {% endif %}
     
