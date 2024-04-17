@@ -8,7 +8,7 @@ register = template.Library()
 
     
 @register.inclusion_tag('tree_menu/menu.html', takes_context=True)
-def draw_menu(context, menu_name):
+def draw_menu(context: dict, menu_name: str) -> dict:
     response_dict = MenuItemModel.objects.select_related('menu').filter(menu__name=menu_name).values('slug', 'lvl', 'name', 'parent__slug', 'url', 'named_url')
 
     current_page_url = context['request'].path
@@ -17,7 +17,7 @@ def draw_menu(context, menu_name):
     [slug_list.append((dct['slug'], dct['lvl'], dct['url'], dct['named_url'], dct['name'], dct['parent__slug'] if dct['parent__slug'] is not None else 'parent')) for dct in response_dict]
     slug_list = sorted(slug_list, key=lambda x: (x[1], x[2]))
 
-    def get_slug_by_url(url, slug_list):
+    def get_slug_by_url(url: str, slug_list: list) -> tuple:
         request = HttpRequest()
         request.path = url
         matched_view = resolve(request.path)
@@ -26,11 +26,11 @@ def draw_menu(context, menu_name):
         for set in slug_list:
             if set[3] == url_name:
                 return set
-        return 'main_page'
+        return ()
     
     out = []
 
-    def add_set(set):
+    def add_set(set: tuple) -> None:
         lvl = set[1]
         parent = set[5]
 
@@ -45,9 +45,9 @@ def draw_menu(context, menu_name):
     for set in slug_list:
         add_set(set)
 
-    def cut_by_url(out_list):
+    def cut_by_url(out_list: list) -> list:
         current_set = get_slug_by_url(current_page_url, slug_list)
-        if current_set == 'main_page':
+        if current_set == ():
             new_out = []
             for set in out_list:
                 if set[1] == 0:
