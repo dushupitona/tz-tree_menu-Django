@@ -6,6 +6,4 @@ from django.shortcuts import render
 def index(request):
     return render(request, 'tree_menu/index.html')
 
-def product_index(request):
-    return render(request, 'tree_menu/slug_index.html')
 
