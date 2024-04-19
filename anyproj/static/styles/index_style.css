@@ -37,6 +37,18 @@ li {
     margin-left: 90px;
 }
 
+.depth-4 {
+    margin-left: 120px;
+}
+  
+.depth-5 {
+    margin-left: 150px;
+}
+
+.depth-6 {
+    margin-left: 180px;
+}
+
 /* add more depth */
 
 a {
